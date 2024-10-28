@@ -1,60 +1,89 @@
+import * as React from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
+import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import IconButton from '@mui/material/IconButton'
+import LockIcon from '@mui/icons-material/Lock'
+import Paper from '@mui/material/Paper'
 
-function Login () {
+function Login() {
+  const [data, setData] = useState({ usuario: '', contraseña: '' })
+  
+  const navigate = useNavigate()
 
-    return (
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log(data)
 
-        <>
-        
-        <main role="main">
+    if (data.usuario === 'IzanHM' && data.contraseña === 'Arguineguin') {
+      navigate('/home')
+    } else {
+      console.log('Usuario y/o contraseña incorrectos');
+    }
+  }
+
+  const handleChangeUsuario = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setData({
+      ...data,
+      usuario: e.target.value,
+    })
+  }
+
+  const handleChangeContraseña = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setData({
+      ...data,
+      contraseña: e.target.value,
+    })
+  }
+
+  return (
     <Container maxWidth="sm" style={{ textAlign: 'center', marginTop: '50px' }}>
+      <Paper elevation={3} style={{ padding: '30px', borderRadius: '10px' }}>
+        <Typography variant="h4" color="primary" gutterBottom>
+          Sistema de acceso
+        </Typography>
 
-      <Typography variant="h1" color="primary" gutterBottom>
-        Bienvenido
-      </Typography>
+        <IconButton color="primary" aria-label="login icon" style={{ marginBottom: '20px' }}>
+          <LockIcon fontSize="large" />
+        </IconButton>
 
-      <Typography variant="h2" color="secondary" gutterBottom>
-        Hola Mundo
-      </Typography>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
+        >
+          <TextField
+            name="usuario"
+            label="Usuario"
+            variant="outlined"
+            value={data.usuario}
+            onChange={handleChangeUsuario}
+            required
+            fullWidth
+          />
 
-      <Typography variant="h3" color="success" gutterBottom>
-        SI SE PUEDE
-      </Typography>
+          <TextField
+            name="contraseña"
+            label="Contraseña"
+            variant="outlined"
+            type="password"
+            value={data.contraseña}
+            onChange={handleChangeContraseña}
+            required
+            fullWidth
+          />
 
-      <Typography variant="subtitle1" color="info" gutterBottom>
-        Indique la contraseña
-      </Typography>
-
-      <Typography variant="body1" color="textSecondary" gutterBottom>
-        Esto es un ejemplo de un texto con variante body1 y color secundario.
-      </Typography>
-
-      <Button variant="text" color="primary" style={{ margin: '10px' }}>
-        Texto Primario
-      </Button>
-
-      <Button variant="contained" color="secondary" style={{ margin: '10px' }}>
-        Contained Secundario
-      </Button>
-
-      <Button variant="outlined" color="success" style={{ margin: '10px' }}>
-        Outlined Exitoso
-      </Button>
-
-      <Button variant="contained" color="error" style={{ margin: '10px' }}>
-        Contained Error
-      </Button>
-
-      <Button variant="outlined" color="info" style={{ margin: '10px' }}>
-        Outlined Info
-      </Button>
+          <Button type="submit" variant="contained" color="secondary" fullWidth>
+            Conectar
+          </Button>
+        </Box>
+      </Paper>
     </Container>
-    </main>
-        </>
-
-    )
+  );
 }
 
 export default Login
