@@ -5,6 +5,10 @@ import CssBaseline from '@mui/material/CssBaseline'
 //import './index.css'
 import { ThemeOptions } from '@mui/material/styles'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+//Importamos el componente Provider de la librearía react-redux
+import { Provider } from 'react-redux'
+//Importamos el componente store que definimos en el fichero ./store/index
+import { store } from './store/index'
 
 export const themeOptions: ThemeOptions = {
   palette: {
@@ -30,7 +34,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
     <CssBaseline/>
+    <Provider store={store}>
     <App />
+    </Provider>
     </ThemeProvider>
   </StrictMode>,
 )

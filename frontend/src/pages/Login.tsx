@@ -9,8 +9,13 @@ import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import LockIcon from '@mui/icons-material/Lock'
 import Paper from '@mui/material/Paper'
+//Importamos el useDispatch del react-redux
+import { useDispatch} from 'react-redux'
+//Importamos las acciones que están en el fichero authSlice.ts
+import { authActions } from '../store/authSlice';
 
 function Login() {
+  const dispatch = useDispatch()
   const [data, setData] = useState({ usuario: '', contraseña: '' })
   
   const navigate = useNavigate()
@@ -20,6 +25,11 @@ function Login() {
     console.log(data)
 
     if (data.usuario === 'IzanHM' && data.contraseña === 'Arguineguin') {
+       // Usamos dispatch para lanzar la acción de login en el caso en que las credenciales sean correctas
+      dispatch(authActions.login({
+        name: data.usuario, //data.user es el nombre de usuario que ha ingresado el usuario
+        rol: 'administrador'
+       }))
       navigate('/home')
     } else {
       console.log('Usuario y/o contraseña incorrectos');
