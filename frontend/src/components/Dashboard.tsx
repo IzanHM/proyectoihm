@@ -38,14 +38,14 @@ function Dashboard() {
 
     const [item, setItem] = useState(itemInitialState)
     const [tableData, setTableData] = useState([])
-    const [showTable, setShowTable] = useState(true)
+    const [mostrartable, setShowTable] = useState(true)
     
     useEffect(() => {
-      if (showTable) {
+      if (mostrartable) {
         getItems()
         setShowTable(false)
       }
-    }, [showTable])
+    }, [mostrartable])
 
     const handleChangeNombre = (e: React.ChangeEvent<HTMLInputElement>) => {
         setItem({
