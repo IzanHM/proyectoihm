@@ -110,12 +110,10 @@ useEffect(() => {
             <MenuIcon />
           </IconButton>
 
-          {/* Nombre del usuario logueado */}
             <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'center' }}>
               {userData.userName}
             </Typography>
 
-          {/* Icono del rol */}
           <IconButton color="inherit">
               {userData.userRol === 'admin' ? <AdminPanelSettingsIcon /> : <AccountCircleIcon />}
             </IconButton>
