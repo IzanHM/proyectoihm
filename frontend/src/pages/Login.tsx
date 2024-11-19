@@ -20,20 +20,28 @@ function Login() {
   
   const navigate = useNavigate()
 
+  async function isVerifiedUser () {
+    fetch(`http://localhost:3030/login?user=${data.usuario}&password=${data.contraseña}`)
+    .then(response => response.json())
+    .then (response => {
+      console.log('Lo que nos llega de la base de datos: ')
+      console.log(response.data)
+      if (response.data.length !== 0) {
+        dispatch(authActions.login({
+          name: data.usuario, //data.user es el nombre de usuario que ha ingresado el usuario
+          rol: response.data.rol
+         }))
+        navigate('/home')
+      } else {
+        console.log('Usuario y/o contraseña incorrectos');
+      }
+    })
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(data)
-
-    if (data.usuario === 'IzanHM' && data.contraseña === 'Arguineguin') {
-       // Usamos dispatch para lanzar la acción de login en el caso en que las credenciales sean correctas
-      dispatch(authActions.login({
-        name: data.usuario, //data.user es el nombre de usuario que ha ingresado el usuario
-        rol: 'administrador'
-       }))
-      navigate('/home')
-    } else {
-      console.log('Usuario y/o contraseña incorrectos');
-    }
+    //console.log(data)
+    isVerifiedUser()
   }
 
   const handleChangeUsuario = (e: React.ChangeEvent<HTMLInputElement>) => {
