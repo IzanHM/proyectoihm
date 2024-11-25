@@ -17,12 +17,15 @@ import HelpIcon from '@mui/icons-material/Help'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import { Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/index'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+import { authActions } from '../store/authSlice';
+
 
 function Menu () {
 
@@ -30,6 +33,7 @@ const [open, setOpen] = React.useState(false)
 
 const userData = useSelector((state: RootState) => state.authenticator)
 
+const dispatch = useDispatch()
 const navigate = useNavigate()
 const isLoggedin = userData.isAutenticated
 
@@ -41,6 +45,12 @@ useEffect(() => {
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
+  }
+
+  const handleLogout = ()=>{
+    dispatch(authActions.logout(
+    ))
+    navigate ('/')
   }
 
   const DrawerList = (
@@ -57,6 +67,7 @@ useEffect(() => {
         </ListItem>
       </Link>
 
+      {userData.userRol === 'admin' && (
       <Link to={'/reports'} style={{textDecoration:'none', color:'black'}}>
         <ListItem disablePadding>
           <ListItemButton>
@@ -67,7 +78,8 @@ useEffect(() => {
           </ListItemButton>
         </ListItem>
       </Link>
-
+      )}
+      
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
@@ -80,16 +92,14 @@ useEffect(() => {
       </List>
       <Divider />
       <List>
-      <Link to={'/'} style={{textDecoration:'none', color:'black'}}>
       <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick ={handleLogout}>
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
             <ListItemText primary="Salir" />
           </ListItemButton>
         </ListItem>
-      </Link>
       </List>
     </Box>
   );

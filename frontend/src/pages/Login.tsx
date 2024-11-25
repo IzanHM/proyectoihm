@@ -12,12 +12,15 @@ import Paper from '@mui/material/Paper'
 //Importamos el useDispatch del react-redux
 import { useDispatch} from 'react-redux'
 //Importamos las acciones que están en el fichero authSlice.ts
-import { authActions } from '../store/authSlice';
+import { authActions } from '../store/authSlice'
+import Alert from '@mui/material/Alert'
 
 function Login() {
   const dispatch = useDispatch()
   const [data, setData] = useState({ usuario: '', contraseña: '' })
   
+  const [error, setError] = useState('')
+
   const navigate = useNavigate()
 
   async function isVerifiedUser () {
@@ -33,7 +36,7 @@ function Login() {
          }))
         navigate('/home')
       } else {
-        console.log('Usuario y/o contraseña incorrectos');
+        setError('Usuario y/o contraseña incorrectos')
       }
     })
   }
@@ -94,6 +97,12 @@ function Login() {
             required
             fullWidth
           />
+
+          {error && (
+          <Alert severity="error" sx={{ mt: 2 }}>
+          {error}
+          </Alert>
+          )}
 
           <Button type="submit" variant="contained" color="secondary" fullWidth>
             Conectar

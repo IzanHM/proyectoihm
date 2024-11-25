@@ -15,6 +15,8 @@ import TableCell from "@mui/material/TableCell"
 import TableBody from "@mui/material/TableBody"
 import IconButton from '@mui/material/IconButton'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store/index'
 
 ///Creamos el tipo itemtype. Este tipo será un objeto con un id opcional de tipo number
 //nombre, marca y tipo de tipo string y el precio de tipo number
@@ -35,6 +37,8 @@ const itemInitialState: ItemType = {
   }
 
 function Dashboard() {
+
+  const userData = useSelector((state: RootState) => state.authenticator)
 
     const [item, setItem] = useState(itemInitialState)
     const [tableData, setTableData] = useState([])
@@ -214,7 +218,9 @@ function Dashboard() {
     <Table aria-label="Tabla que muestra los dispositivos electrónicos">
     <TableHead>
     <TableRow>
+    {userData.userRol === 'admin' && (
     <TableCell align="center">BORRAR</TableCell>
+    )}
     <TableCell align="center">NOMBRE</TableCell>
     <TableCell align="center">MARCA</TableCell>
     <TableCell align="center">TIPO</TableCell>
@@ -224,11 +230,13 @@ function Dashboard() {
     <TableBody>
     {tableData.map((row: ItemType) =>
       <TableRow key={row.id}>
+    {userData.userRol === 'admin' && (
       <TableCell align="center">
       <IconButton onClick={() => handleDelete(row)}>
       <DeleteForeverIcon color="primary" />
       </IconButton>
       </TableCell>
+    )}
       <TableCell align="center">{row.nombre}</TableCell>
       <TableCell align="center">{row.marca}</TableCell>
       <TableCell align="center">{row.tipo}</TableCell>
