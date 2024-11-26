@@ -16,7 +16,8 @@ import DescriptionIcon from '@mui/icons-material/Description'
 import HelpIcon from '@mui/icons-material/Help'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import AdbIcon from '@mui/icons-material/Adb'
+import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon'
 import {Link} from 'react-router-dom'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -79,6 +80,19 @@ useEffect(() => {
         </ListItem>
       </Link>
       )}
+
+      {userData.userRol === 'admin' && (
+      <Link to={'/gestion'} style={{textDecoration:'none', color:'black'}}>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <DescriptionIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Gestion de usuario" />
+          </ListItemButton>
+        </ListItem>
+      </Link>
+      )}
       
         <ListItem disablePadding>
           <ListItemButton>
@@ -125,7 +139,7 @@ useEffect(() => {
             </Typography>
 
           <IconButton color="inherit">
-              {userData.userRol === 'admin' ? <AdminPanelSettingsIcon /> : <AccountCircleIcon />}
+              {userData.userRol === 'admin' ? (<AdminPanelSettingsIcon />) : userData.userRol === 'invitado' ? (<InsertEmoticonIcon />): (<AdbIcon />)}
             </IconButton>
 
         </Toolbar>

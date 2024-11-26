@@ -192,6 +192,7 @@ function Dashboard() {
               variant="contained"
               color="primary"
               fullWidth
+              disabled={userData.userRol === 'invitado'}
             >
             Registrar producto 
             </Button>
