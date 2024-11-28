@@ -17,6 +17,7 @@ import IconButton from '@mui/material/IconButton'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/index'
+import Tooltip from '@mui/material/Tooltip'
 
 ///Creamos el tipo itemtype. Este tipo será un objeto con un id opcional de tipo number
 //nombre, marca y tipo de tipo string y el precio de tipo number
@@ -187,6 +188,7 @@ function Dashboard() {
 
         <Grid container spacing={2}>
         <Grid size={{xs:12, sm:6}}>
+        <Tooltip title="Añadir producto" placement="bottom" arrow>
             <Button
               type="submit"
               variant="contained"
@@ -195,9 +197,11 @@ function Dashboard() {
             >
             Registrar producto 
             </Button>
-          </Grid>
+        </Tooltip>
+        </Grid>
 
           <Grid size={{xs:12, sm:6}}>
+          <Tooltip title="Limpiar campos" placement="bottom" arrow>
             <Button
               variant="contained"
               color="secondary"
@@ -206,6 +210,7 @@ function Dashboard() {
             >
               Limpiar
             </Button>
+          </Tooltip>
           </Grid>
         </Grid>
       </Box>
@@ -232,9 +237,11 @@ function Dashboard() {
       <TableRow key={row.id}>
     {userData.userRol === 'admin' && (
       <TableCell align="center">
+      <Tooltip title="Eliminar producto" placement="bottom" arrow>
       <IconButton onClick={() => handleDelete(row)}>
       <DeleteForeverIcon color="primary" />
       </IconButton>
+      </Tooltip>
       </TableCell>
     )}
       <TableCell align="center">{row.nombre}</TableCell>

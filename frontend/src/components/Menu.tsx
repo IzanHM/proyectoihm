@@ -25,6 +25,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import { authActions } from '../store/authSlice';
+import Tooltip from '@mui/material/Tooltip'
 
 
 function Menu () {
@@ -57,6 +58,7 @@ useEffect(() => {
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
       <Link to={'/home'} style={{textDecoration:'none', color:'black'}}>
+      <Tooltip title="Acceder a página Home" placement="right" arrow>
       <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
@@ -65,10 +67,12 @@ useEffect(() => {
             <ListItemText primary="Inicio" />
           </ListItemButton>
         </ListItem>
+      </Tooltip>
       </Link>
 
       {userData.userRol === 'admin' && (
       <Link to={'/reports'} style={{textDecoration:'none', color:'black'}}>
+      <Tooltip title="Acceder a página Informes" placement="right" arrow>
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
@@ -77,9 +81,12 @@ useEffect(() => {
             <ListItemText primary="Informes" />
           </ListItemButton>
         </ListItem>
+      </Tooltip>
       </Link>
       )}
       
+      <Link to={'/Manual_Usuario.pdf'} target='_blank'>
+      <Tooltip title="Descargar manual de usuario" placement="right" arrow>
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
@@ -88,10 +95,13 @@ useEffect(() => {
             <ListItemText primary="Ayuda" />
           </ListItemButton>
         </ListItem>
+      </Tooltip>
+      </Link>
 
       </List>
       <Divider />
       <List>
+      <Tooltip title="Regresar a login" placement="right" arrow>
       <ListItem disablePadding>
           <ListItemButton onClick ={handleLogout}>
             <ListItemIcon>
@@ -100,6 +110,7 @@ useEffect(() => {
             <ListItemText primary="Salir" />
           </ListItemButton>
         </ListItem>
+      </Tooltip>
       </List>
     </Box>
   );
@@ -109,6 +120,7 @@ useEffect(() => {
         <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
+        <Tooltip title="Menú de acceso a páginas" placement="right" arrow>
           <IconButton
             size="large"
             edge="start"
@@ -119,15 +131,16 @@ useEffect(() => {
           >
             <MenuIcon />
           </IconButton>
-
+        </Tooltip>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'center' }}>
               {userData.userName}
             </Typography>
 
+        <Tooltip title="Icono en función del rol" placement="left" arrow>
           <IconButton color="inherit">
               {userData.userRol === 'admin' ? <AdminPanelSettingsIcon /> : <AccountCircleIcon />}
             </IconButton>
-
+        </Tooltip>
         </Toolbar>
       </AppBar>
     </Box>

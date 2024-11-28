@@ -14,6 +14,7 @@ import { useDispatch} from 'react-redux'
 //Importamos las acciones que están en el fichero authSlice.ts
 import { authActions } from '../store/authSlice'
 import Alert from '@mui/material/Alert'
+import Tooltip from '@mui/material/Tooltip'
 
 function Login() {
   const dispatch = useDispatch()
@@ -103,10 +104,11 @@ function Login() {
           {error}
           </Alert>
           )}
-
+          <Tooltip title="Acceder a la página" placement="bottom" arrow>
           <Button type="submit" variant="contained" color="secondary" fullWidth>
             Conectar
           </Button>
+          </Tooltip>
         </Box>
       </Paper>
     </Container>

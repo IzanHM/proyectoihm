@@ -3,6 +3,7 @@ import Button from "@mui/material/Button"
 import Container from '@mui/material/Container'
 import { useState } from 'react'
 import InformeColeccion from '../components/InformeColeccion'
+import Tooltip from '@mui/material/Tooltip'
 
 function Reports() {
 
@@ -24,7 +25,7 @@ function Reports() {
       <Menu />
       <br /><br />
       <Container sx={{ textAlign: 'center' }}>
-        
+      <Tooltip title="Mostrar tabla de informes" placement="bottom" arrow>
         {mostrarInforme ? (
           <InformeColeccion datos={datosColeccion} />) 
           : (<Button
@@ -35,6 +36,7 @@ function Reports() {
             Informes colección
           </Button>
         )}
+      </Tooltip>
       </Container>
     </>
   )
