@@ -26,14 +26,14 @@ interface DatosProps {
       title="Informe de Colección"
       columns={columnas}
       data={datos}
-      renderSummaryRow={({ column, data }) =>
+      renderSummaryRow={({ column, data }) => //De aqui 
         column.field === "precio"
           ? {
               value: data.reduce((agg, row) => agg + row.precio, 0),
               style: { background: "red" },
             }
           : undefined
-      }
+      } // Hasta aqui es lo de la sumatoria
       options={{
         exportMenu: [
           {
